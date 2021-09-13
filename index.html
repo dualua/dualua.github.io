@@ -1,41 +1,27 @@
 ---
 layout: page
 ---
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-    </a>
-    <p class="post-meta" style="margin-bottom:5px">Posted by {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}</p>
-	<div class="notepad-index-post-tags" style="">
-		{% for tag in post.tags %}<a href="{{ site.baseurl }}/search/index.html#{{ tag | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} tag">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-	</div>
-</div>
-<hr>
-{% endfor %}
 
 <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-	  
-<div class="row">
+
+{% for post in paginator.posts %}	  
 <div class="col s12 m6 l4">
-  <div class="card">
+  <div class="card" style="box-shadow: 2px 2px 5px 1px rgb(255 255 255 / 15%)">
 	<div class="card-image">
-	  <img src="https://i.ibb.co/XCdgtgr/Red-Persica-2.png">
-	  <span class="card-title" style="background-color: #000000aa; padding: 12px">Red Persica</span>
-	  <a class="btn-floating halfway-fab waves-effect waves-light"><i class="material-icons-outlined" style="font-size:32px; background-color: #c50000;">info</i></a>
+	  <img src="{{ post.CardImage }}">
+	  <span class="card-title" style="background-color: #000000aa; padding: 12px">{{ post.ShipName }}</span>
+	  <a href="{{ post.url | prepend: site.baseurl }}" class="btn-floating halfway-fab waves-effect waves-light"><i class="material-icons-outlined" style="font-size:32px; background-color: #c50000;">info</i></a>
+	</div>	
+	<div class="card-content" style="word-wrap: break-word; overflow: hidden; max-height: 100px; padding: 12px; padding-top: 12px;">
+	  <p>{{ post.ShipTagLine }}</p>
 	</div>
-	<div class="card-content" style="word-wrap: break-word; overflow: hidden; max-height: 212px">
-	  <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively. TTTTTTTTTTTTTTTTTTTTTTTT</p>
+	<hr style="margin-top:5px; margin-bottom:5px;">
+	<div class="notepad-index-post-tags" style="padding-left:5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px">
+		{% for tag in post.tags %}<a href="{{ site.baseurl }}/search/index.html#{{ tag | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} tag">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
 	</div>
   </div>
 </div>
-</div>
+{% endfor %}
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}
