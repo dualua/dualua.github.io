@@ -1,0 +1,375 @@
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<link href="{{ site.baseurl }}/lib/all.css" rel="stylesheet">
+
+
+<style>
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+td {
+  color: #fff
+}
+
+th > img {
+  width: 32px; 
+}
+
+h1 {
+  color: #f00
+}
+
+h2 {
+  color: #888
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+  background-color: #161616;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: #161616;
+}
+
+@media (min-aspect-ratio: 1/1) { 
+  .right-slide {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    transition: transform 0.5s ease-in-out;
+    background-color: #161616;
+  }
+
+  .right-slide > div {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .left-slide {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .left-slide > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  button {
+    background-color: #000;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  button:hover {
+    color: #fff;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .slider-container .action-buttons button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+  }
+
+  .slider-container .action-buttons .down-button {
+    transform: translateX(0%);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .slider-container .action-buttons .up-button {
+    transform: translateY(-100%);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+}
+
+@media (aspect-ratio: 1/1), (max-aspect-ratio: 1/1) { 
+  
+
+  .right-slide {
+    height: 50%;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+    z-index: 10;
+    background-color: #161616;
+  }
+
+  .right-slide > div {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .left-slide {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transition: transform 0.5s ease-in-out;
+    z-index: 50;
+  }
+
+  .left-slide > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  
+  button {
+    background-color: #000;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  button:hover {
+    color: #fff;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .slider-container .action-buttons button {
+    position: absolute;
+    left: 00%;
+    top: 25%;
+    z-index: 100;
+  }
+
+  .slider-container .action-buttons .down-button {
+    transform: translateX(0%);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .slider-container .action-buttons .up-button {
+    transform: translateY(-100%);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+}
+</style>
+
+<div class="slider-container">
+
+	<div class="left-slide">
+		<div style="background-color: #161616">
+		  <h1>{{ page.ShipName }}</h1>
+		  <h2>{{ page.ShipTagLine }}</h2>
+		  
+		  <h4>{{ page.ShipSummary }}</h4>
+		  
+		  <h5>Highlights</h5>          
+		  
+		  <div class="container table-responsive"> 
+			<table class="table table-sm table-striped table-hover table-dark">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col">Feature</th>
+				  <th scope="col">Metric</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				{% for entry in page.Highlights %}
+				<tr>
+				  <th scope="row">{{entry.Highlight.Name}}</th>
+				  <td>{{entry.Highlight.Value}}</td>
+				</tr>
+				{% endfor %}
+			  </tbody>
+			</table>
+		  </div>
+		  
+		  <h5>Component List</h5>
+		  
+		  <div class="container table-responsive"> 
+			<table class="table table-sm table-striped table-hover table-dark">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col">Feature</th>
+				  <th scope="col">Metric</th>
+				  <th scope="col">Feature</th>
+				  <th scope="col">Metric</th>
+				  <th scope="col">Feature</th>
+				  <th scope="col">Metric</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th colspan="6">Cargo</th>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <th colspan="6">Utility</th>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <th colspan="6">Thrusters</th>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <th colspan="6">Consumables</th>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				<tr>
+				  <th colspan="6">Power</th>
+				</tr>
+				<tr>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				  <th scope="row"><img src="https://i.ibb.co/M5YVzw9/Cargo-Lock.png" alt="Cargo-Lock" border="0"> Cargo Lock</th>
+				  <td>0</td>
+				</tr>
+				
+				
+			  </tbody>
+			</table>
+		  </div>      
+		  
+		</div>
+	</div>
+
+    <div class="right-slide">
+		<div style="background-image: url('https://i.ibb.co/jkLC8G0/Red-Persica.png');"></div>
+		<div style="background-image: url('https://i.ibb.co/XCdgtgr/Red-Persica-2.png');"></div>
+		<div style="background-image: url('https://i.ibb.co/LtbZKjw/Red-Persica-3.png');"></div>
+		<div style="background-image: url('https://i.ibb.co/kcP0L8L/Red-Persica-4.png');"></div>
+	</div>
+	<div class="action-buttons">
+		<button class="down-button">
+			<i class="fas fa-arrow-down"></i>
+		</button>
+		<button class="up-button">
+			<i class="fas fa-arrow-up"></i>
+		</button>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+  new Crate({
+    server: '882754059092762655',
+    channel: '882755205089865748'
+  })
+</script>
+
+<script>
+const sliderContainer = document.querySelector('.slider-container')
+const slideRight = document.querySelector('.right-slide')
+const upButton = document.querySelector('.up-button')
+const downButton = document.querySelector('.down-button')
+const slidesLength = slideRight.querySelectorAll('div').length
+
+let activeSlideIndex = 0
+
+upButton.addEventListener('click', () => changeSlide('up'))
+downButton.addEventListener('click', () => changeSlide('down'))
+
+const changeSlide = (direction) => {
+    const sliderHeight = slideRight.clientHeight
+    if(direction === 'down') {
+        activeSlideIndex++
+        if(activeSlideIndex > slidesLength - 1) {
+            activeSlideIndex = 0
+        }
+    } else if(direction === 'up') {
+        activeSlideIndex--
+        if(activeSlideIndex < 0) {
+            activeSlideIndex = slidesLength - 1
+        }
+    }
+
+    slideRight.style.transform = `translateY(${-activeSlideIndex * sliderHeight}px)`
+}
+</script>
+
+
