@@ -1,11 +1,11 @@
 # Site settings
-title: SilverZero's ShipShop
-description: "Violah"
-url: "https://d6rks1lv3rz3r0.github.io/"
+title: DUA(L)UA
+description: "Open source hub for Dual Universe related LUA."
+url: "https://dualua.github.io/"
 
 # Secondary Parameters
-baseurl: "/Starbase"
-headercolor: "#FF0000"
+baseurl: "/"
+headercolor: "#000000"
 # Tertiary Parameters
 #g-analytics:
 

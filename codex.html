@@ -1,0 +1,111 @@
+---
+layout: page
+title: "Codex"
+description: ""
+header-img: "img/home-bg.jpg"
+---
+
+<style>
+
+</style>
+
+
+{% for element in site.data.LuaAPI %}
+<div class="post-preview">
+
+    {% assign eleclass = element[0] | append: "shelf" %}
+
+    <h5 id={{element[0]}}  class="post-title" data-toggle="collapse" data-target="#{{eleclass}}">{{ element[0] }} </h5>
+
+    <hr>
+
+    <div id={{eleclass}} class="collapse">
+
+    {% for apicall in element[1] %}
+        {% assign prefix = apicall[0] | slice: 0, 2 %}
+        {% if prefix contains "on" %}
+
+            {% assign currentid = apicall[0] | append: element[0] %}
+
+            <h5 id = {{apicall[0]}} class="subheader" data-toggle="collapse" data-target="#{{currentid}}">{{ apicall[1].Name }}</h5>
+
+            <div id="{{currentid}}" class="collapse">
+
+            <p>{{ apicall[1].Description }}</p>       
+
+            {% if apicall[1].Parameters != "" %}
+                <h5> Parameters </h5>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    {{ apicall[1].Parameters }}
+                </table>
+            {% endif %}
+
+            {% if apicall[1].Returns != "" %}
+                <h5> Returns </h5>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>       
+                        <th>Description</th>
+                    </tr>
+                    {{ apicall[1].Returns }}
+                </table>
+            {% endif %}
+
+            </div>
+
+        {% endif %}
+    {% endfor %}
+
+    {% for apicall in element[1] %}
+        {% assign prefix = apicall[0] | slice: 0, 2 %}
+        {% unless prefix contains "on" %}
+
+            {% assign currentid = apicall[0] | append: element[0] %}
+
+            <h5 class="subheader" data-toggle="collapse" data-target="#{{currentid}}">{{ apicall[1].Name }}</h5>
+
+
+            <div id="{{currentid}}" class="collapse">
+
+            <p>{{ apicall[1].Description }}</p>       
+
+            {% if apicall[1].Parameters != "" %}
+                <h5> Parameters </h5>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    {{ apicall[1].Parameters }}
+                </table>
+            {% endif %}
+
+            {% if apicall[1].Returns != "" %}
+                <h5> Returns </h5>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>       
+                        <th>Description</th>
+                    </tr>
+                    {{ apicall[1].Returns }}
+                </table>
+            {% endif %}
+
+            </div>
+
+        {% endunless %}
+    {% endfor %}
+
+    </div>  
+
+</div>
+{% endfor %}
+
